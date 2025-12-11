@@ -1,7 +1,9 @@
-name: Build and Zip Chrome Extension
+name: Build and Zip Extensions
 
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -27,8 +29,35 @@ jobs:
       - name: Build Chrome
         run: pnpm build:chrome
 
-      - name: Upload Chrome extension artifacts
+      - name: Build Firefox
+        run: pnpm build:firefox
+
+      - name: Zip Chrome extension
+        run: |
+          cd dist_chrome
+          zip -r ../chrome-extension.zip .
+
+      - name: Zip Firefox extension
+        run: |
+          cd dist_firefox
+          zip -r ../firefox-extension.zip .
+
+      - name: Upload Chrome extension artifact
         uses: actions/upload-artifact@v4
         with:
-          name: vite-web-extension-chrome
-          path: dist_chrome
+          name: chrome-extension-zip
+          path: chrome-extension.zip
+
+      - name: Upload Firefox extension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firefox-extension-zip
+          path: firefox-extension.zip
+
+      - name: Upload assets to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            chrome-extension.zip
+            firefox-extension.zip
