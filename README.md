@@ -3,9 +3,9 @@
 > [!WARNING]
 > This extension is still in the experimental phase.
 
-<center>
+<p align="center">
   <img src="./public/icon-text.png" width="200" />
-</center>
+</p>
 
 An extension that helps you inspect iframes on a webpage. It intercepts iframe messages from all iframes on the page and displays them in a developer tools panel.
 
