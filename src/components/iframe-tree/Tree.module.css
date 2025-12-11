@@ -1,0 +1,6 @@
+.tree {
+  flex: 1;
+  overflow: hidden;
+  user-select: none;
+  font-size: 12px;
+}

@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "Iframe inspector devtools",
+  "description": "Inspect iframe communication easily from devtools panel",
+  "icons": {
+    "128": "icons/icon-120x120.png"
+  },
+  "permissions": [
+    "activeTab",
+    "webNavigation"
+  ],
+  "background": {
+    "service_worker": "src/pages/background/index.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "src/pages/content-isolated/index.ts"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "src/pages/content/index.ts"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "devtools_page": "src/pages/devtools/index.html",
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/icon-120x120.png",
+        "icons/icon-48x48.png"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

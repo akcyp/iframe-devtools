@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iframe Inspector Test Page</title>
+  </head>
+  <body>
+    <h1>Iframe Inspector Test Page [NESTED]</h1>
+    <form>
+        <label for="input">Input:</label>
+        <input type="text" id="input" name="input" />
+        <br /><br />
+        <button type="submit">Send to top iframe</button>
+    </form>
+    <script>
+        const form = document.querySelector('form');
+        const input = document.getElementById('input');
+    
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const message = input.value;
+            window.parent.postMessage(message, '*');
+        });
+    
+        window.addEventListener('message', (event) => {
+            console.log('[NESTED] Received message:', event.data);
+        });
+    </script>
+  </body>
+</html>

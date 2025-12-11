@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iframe Inspector Test Page</title>
+  </head>
+  <body>
+    <h1>Iframe Inspector Test Page [TOP]</h1>
+    <form>
+        <label for="input">Input:</label>
+        <input type="text" id="input" name="input" />
+        <br /><br />
+        <button type="submit">Send to nested iframe</button>
+    </form>
+    <iframe
+        src="./nested.html"
+        title="Test Iframe"
+        width="600"
+        height="400"
+        style="border: 1px solid black;"
+    ></iframe>
+    <script>
+        const form = document.querySelector('form');
+        const input = document.getElementById('input');
+        const iframe = document.querySelector('iframe');
+    
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const message = input.value;
+            iframe.contentWindow.postMessage(message, '*');
+        });
+    
+        window.addEventListener('message', (event) => {
+            console.log('[TOP] Received message:', event.data);
+        });
+    </script>
+  </body>
+</html>

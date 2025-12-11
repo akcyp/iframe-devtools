@@ -1,0 +1,68 @@
+.node {
+  display: flex;
+  align-items: center;
+  height: var(--spacing-10);
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+
+.node:hover {
+  background-color: var(--state-hover);
+}
+
+.node.selected {
+  background-color: var(--state-selected) !important;
+}
+
+.disclosure {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text-primary);
+  transition: transform 0.1s;
+  user-select: none;
+}
+
+.disclosure.expanded {
+  transform: rotate(90deg);
+}
+
+.disclosure-placeholder {
+  width: 14px;
+  display: inline-block;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px;
+  mask-image: url("../../assets/icons/iframe.svg");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background-color: var(--text-primary);
+}
+
+.icon.top {
+  mask-image: url("../../assets/icons/frame.svg");
+}
+
+.title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: var(--spacing-10);
+}
+
+.children {
+  display: flex;
+  flex-direction: column;
+}

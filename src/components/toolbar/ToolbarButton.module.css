@@ -1,0 +1,36 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 50%;
+  --icon-size: var(--spacing-9);
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  color: var(--icon-primary);
+  position: relative;
+}
+
+.btn::before {
+  content: '';
+  display: block;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  background-color: currentColor;
+  mask: var(--icon-url) center / contain no-repeat;
+}
+
+.btn:hover::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--state-hover);
+}

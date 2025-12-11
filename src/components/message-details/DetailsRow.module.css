@@ -1,0 +1,29 @@
+.row {
+  display: flex;
+  gap: var(--spacing-8);
+  font: var(--typography-body5-regular);
+  min-height: var(--spacing-10);
+  align-items: flex-start;
+  padding: var(--spacing-3) 0;
+}
+
+.label {
+  min-width: var(--spacing-20);
+  font: var(--typography-body5-medium);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.value {
+  flex: 1;
+  color: var(--text-primary);
+  word-break: break-word;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.value.monospace {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono);
+}

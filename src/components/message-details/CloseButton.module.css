@@ -1,0 +1,33 @@
+.btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: var(--radius-xs);
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+  flex-shrink: 0;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--state-hover);
+  transform: scale(1.1);
+}
+
+.btn:active {
+  background-color: var(--state-ripple);
+  transform: scale(0.95);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

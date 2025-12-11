@@ -1,0 +1,10 @@
+.toolbar {
+  height: 26px;
+  min-height: 26px;
+  max-height: 26px;
+  background-color: var(--surface-base);
+  border-bottom: 1px solid var(--border-primary);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+}

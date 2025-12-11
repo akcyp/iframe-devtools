@@ -1,0 +1,213 @@
+/* Typography utilities */
+.monospace {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono);
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono);
+}
+
+.badge {
+  display: inline-block;
+  padding: 1px 4px;
+  margin-right: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  background: var(--surface-tertiary);
+  color: var(--text-primary);
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.blue {
+  color: var(--color-primary);
+}
+
+.green {
+  color: var(--color-success);
+}
+
+/* Table container */
+.tableContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  line-height: 120%;
+}
+
+.tableContainer:focus-visible {
+  outline: 2px solid var(--state-focus);
+  outline-offset: -2px;
+}
+
+.scrollContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden auto;
+  transform: translateZ(0);
+  background-color: var(--surface-base);
+}
+
+/* Table base styles */
+.table {
+  position: absolute;
+  inset: 0;
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: separate;
+  width: 100%;
+  border-top: 0 none transparent;
+}
+
+/* Table header */
+.table thead {
+  position: sticky;
+  top: 0;
+  height: 31px;
+  z-index: 1;
+  background-color: var(--surface-secondary);
+}
+
+.table th {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 18px;
+  height: 18px;
+  border-left: 1px solid var(--border-primary);
+  border-bottom: 1px solid var(--border-primary);
+  padding: 1px 4px;
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+  background-color: var(--surface-secondary);
+}
+
+.table th:first-child {
+  border-left-width: 0;
+}
+
+.table th > div {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-width: 8px;
+}
+
+/* Sortable header styles */
+.table th.sortable {
+  position: relative;
+  cursor: pointer;
+}
+
+.table th.sortable:hover,
+.table th.sortable:focus-within {
+  background-color: var(--state-hover);
+}
+
+.sortIconContainer {
+  min-width: 0;
+  position: absolute;
+  top: 1px;
+  right: 0;
+  bottom: 1px;
+  display: flex;
+  align-items: center;
+}
+
+.sortIcon {
+  margin-right: 4px;
+  margin-bottom: -2px;
+  width: 14px;
+  height: 14px;
+  display: none;
+}
+
+.sortAscending .sortIcon::before {
+  content: '▲';
+  font-size: 10px;
+  color: var(--icon-primary);
+}
+
+.sortDescending .sortIcon::before {
+  content: '▼';
+  font-size: 10px;
+  color: var(--icon-primary);
+}
+
+.sortAscending .sortIcon,
+.sortDescending .sortIcon {
+  display: inline-block;
+}
+
+.sortAscending,
+.sortDescending {
+  padding-right: 14px;
+}
+
+/* Table body */
+.table tbody {
+  background: transparent;
+}
+
+.table tbody tr {
+  height: 20px;
+  background-color: var(--surface-primary);
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: var(--surface-secondary);
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--surface-primary);
+}
+
+/* Table cells */
+.table td {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 20px;
+  height: 20px;
+  border-left: 1px solid var(--border-primary);
+  padding: 0 4px;
+  vertical-align: middle;
+  user-select: text;
+}
+
+.table td:first-child {
+  border-left-width: 0;
+}
+
+.table td > div {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-width: 8px;
+  line-height: normal;
+}
+
+/* Selected row styles */
+.table tbody tr.selected {
+  background-color: var(--state-selected) !important;
+  color: inherit;
+}
+
+.tableContainer:focus-within .table tbody tr.selected {
+  color: var(--text-on-container);
+}
+
+.tableContainer:focus-within .table tbody tr.selected td {
+  border-left-color: var(--border-on-container);
+}
+
+/* Empty state */
+.emptyState {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-disabled);
+}
+

@@ -1,0 +1,112 @@
+:root {
+  /* Surface colors */
+  --surface-base: rgb(253 252 251);
+  --surface-primary: rgb(255 255 255);
+  --surface-secondary: rgb(241 243 244);
+  --surface-tertiary: color-mix(in srgb, rgb(11 87 208) 11%, rgb(253 252 251));
+  --surface-variant: rgb(225 227 225);
+  --surface-container: color-mix(in srgb, rgb(11 87 208) 12%, rgb(253 252 251));
+
+  /* Text colors */
+  --text-primary: rgb(31 31 31);
+  --text-secondary: rgb(71 71 71);
+  --text-disabled: rgb(31 31 31 / 38%);
+  --text-on-container: rgb(4 30 73);
+
+  /* Accent colors */
+  --color-primary: rgb(76 141 246);
+  --color-success: rgb(30 164 70);
+
+  /* Border colors */
+  --border-primary: rgb(218 220 224);
+  --border-on-container: rgb(195 198 203);
+
+  /* State colors */
+  --state-hover: color-mix(in srgb, rgb(31 31 31) 6%, transparent);
+  --state-focus: rgb(11 87 208);
+  --state-selected: rgb(227 227 227);
+  --state-ripple: color-mix(in srgb, rgb(31 31 31) 8%, transparent);
+
+  /* Icon colors */
+  --icon-primary: rgb(71 71 71);
+
+  /* Font families - defaults, will be overridden by platform classes */
+  --font-family: system-ui, sans-serif;
+  --font-mono: monospace;
+
+  /* Font sizes */
+  --font-size-mono: 11px;
+
+  /* Typography scales */
+  --typography-body5-regular: 400 11px / 16px var(--font-family);
+  --typography-body5-medium: 500 11px / 16px var(--font-family);
+
+  --spacing-2: 2px;
+  --spacing-3: 4px;
+  --spacing-4: 6px;
+  --spacing-5: 8px;
+  --spacing-6: 12px;
+  --spacing-8: 16px;
+  --spacing-9: 20px;
+  --spacing-10: 22px;
+  --spacing-20: 112px;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+
+  --icon-size: 16px;
+
+  &.platform-linux {
+    --font-family: "Google Sans Text", "Google Sans", system-ui, sans-serif;
+    --font-mono: "Noto Sans Mono", "DejaVu Sans Mono", monospace;
+    --font-size-mono: 11px;
+  }
+
+  &.platform-mac {
+    --font-family: system-ui, sans-serif;
+    --font-mono: monospace;
+    --font-size-mono: 11px;
+  }
+
+  &.platform-windows {
+    --font-family: system-ui, sans-serif;
+    --font-mono: monospace;
+    --font-size-mono: 12px;
+  }
+}
+
+/* Dark mode - automatically applied based on system preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Surface colors */
+    --surface-base: rgb(32 33 36);
+    --surface-primary: rgb(32 33 36);
+    --surface-secondary: rgb(41 42 45);
+    --surface-tertiary: color-mix(in srgb, rgb(168 199 250) 11%, rgb(32 33 36));
+    --surface-variant: rgb(68 71 70);
+    --surface-container: color-mix(in srgb, rgb(168 199 250) 12%, rgb(32 33 36));
+
+    /* Text colors */
+    --text-primary: rgb(232 234 237);
+    --text-secondary: rgb(154 160 166);
+    --text-disabled: rgb(255 255 255 / 38%);
+    --text-on-container: rgb(168 199 250);
+
+    /* Accent colors */
+    --color-primary: rgb(138 180 248);
+    --color-success: rgb(55 190 95);
+
+    /* Border colors */
+    --border-primary: rgb(60 64 67);
+    --border-on-container: rgb(95 99 104);
+
+    /* State colors */
+    --state-hover: color-mix(in srgb, rgb(255 255 255) 6%, transparent);
+    --state-focus: rgb(168 199 250);
+    --state-selected: rgb(71 71 71);
+    --state-ripple: color-mix(in srgb, rgb(255 255 255) 8%, transparent);
+
+    /* Icon colors */
+    --icon-primary: rgb(154 160 166);
+  }
+}
