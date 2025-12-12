@@ -23,7 +23,12 @@ interface MessagesTableProps {
   onMessageOpen?: (message: IframeMessage | null) => void;
 }
 
-export function MessagesTable({ messages, filterText = '', onMessageSelect, onMessageOpen }: MessagesTableProps) {
+export function MessagesTable({
+  messages,
+  filterText = '',
+  onMessageSelect,
+  onMessageOpen,
+}: MessagesTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [selectedRow, setSelectedRow] = useState<string | null>(null);
   const selectedRowIndexRef = useRef<number>(-1);
@@ -34,101 +39,100 @@ export function MessagesTable({ messages, filterText = '', onMessageSelect, onMe
     return filter(messages, filterText);
   }, [messages, filterText]);
 
-  const columns: ColumnDef<IframeMessage>[] = useMemo(() => [
-    {
-      accessorKey: 'timestamp',
-      header: 'Time',
-      cell: ({ row }) => (
-        <span className={classes.monospace}>
-          {formatTime(row.original.timestamp)}
-        </span>
-      ),
-      size: 100,
-      minSize: 100,
-      maxSize: 100,
-    },
-    {
-      accessorKey: 'source',
-      header: 'Source',
-      cell: ({ row }) => {
-        const msg = row.original;
-        const displayUrl = formatUrl(msg.source);
-        const fullInfo = msg.sourceOrigin && msg.sourceOrigin !== msg.source
-          ? `${msg.source}\nOrigin: ${msg.sourceOrigin}`
-          : msg.source;
+  const columns: ColumnDef<IframeMessage>[] = useMemo(
+    () => [
+      {
+        accessorKey: 'timestamp',
+        header: 'Time',
+        cell: ({ row }) => (
+          <span className={classes.monospace}>{formatTime(row.original.timestamp)}</span>
+        ),
+        size: 100,
+        minSize: 100,
+        maxSize: 100,
+      },
+      {
+        accessorKey: 'source',
+        header: 'Source',
+        cell: ({ row }) => {
+          const msg = row.original;
+          const displayUrl = formatUrl(msg.source);
+          const fullInfo =
+            msg.sourceOrigin && msg.sourceOrigin !== msg.source
+              ? `${msg.source}\nOrigin: ${msg.sourceOrigin}`
+              : msg.source;
 
-        return (
-          <span className={classes.code} title={fullInfo}>
-            {msg.isSourceTop && <span className={classes.badge}>Top</span>}
-            {displayUrl}
-          </span>
-        );
+          return (
+            <span className={classes.code} title={fullInfo}>
+              {msg.isSourceTop && <span className={classes.badge}>Top</span>}
+              {displayUrl}
+            </span>
+          );
+        },
+        size: 200,
+        minSize: 200,
+        maxSize: 300,
       },
-      size: 200,
-      minSize: 200,
-      maxSize: 300,
-    },
-    {
-      accessorKey: 'target',
-      header: 'Target',
-      cell: ({ row }) => {
-        const msg = row.original;
-        const displayUrl = formatUrl(msg.target);
-        const fullInfo = msg.targetOrigin && msg.targetOrigin !== msg.target
-          ? `${msg.target}\nOrigin: ${msg.targetOrigin}`
-          : msg.target;
+      {
+        accessorKey: 'target',
+        header: 'Target',
+        cell: ({ row }) => {
+          const msg = row.original;
+          const displayUrl = formatUrl(msg.target);
+          const fullInfo =
+            msg.targetOrigin && msg.targetOrigin !== msg.target
+              ? `${msg.target}\nOrigin: ${msg.targetOrigin}`
+              : msg.target;
 
-        return (
-          <span className={classes.code} title={fullInfo}>
-            {msg.isTargetTop && <span className={classes.badge}>Top</span>}
-            {displayUrl}
-          </span>
-        );
+          return (
+            <span className={classes.code} title={fullInfo}>
+              {msg.isTargetTop && <span className={classes.badge}>Top</span>}
+              {displayUrl}
+            </span>
+          );
+        },
+        size: 200,
+        minSize: 200,
+        maxSize: 300,
       },
-      size: 200,
-      minSize: 200,
-      maxSize: 300,
-    },
-    {
-      accessorKey: 'direction',
-      header: 'Direction',
-      cell: ({ row }) => {
-        const direction = row.original.direction;
-        return (
-          <span className={direction === 'sent' ? classes.blue : classes.green}>
-            {direction === 'sent' ? '↑ Sent' : '↓ Received'}
-          </span>
-        );
+      {
+        accessorKey: 'direction',
+        header: 'Direction',
+        cell: ({ row }) => {
+          const direction = row.original.direction;
+          return (
+            <span className={direction === 'sent' ? classes.blue : classes.green}>
+              {direction === 'sent' ? '↑ Sent' : '↓ Received'}
+            </span>
+          );
+        },
+        size: 60,
+        minSize: 60,
+        maxSize: 60,
       },
-      size: 60,
-      minSize: 60,
-      maxSize: 60,
-    },
-    {
-      accessorKey: 'data',
-      header: 'Message',
-      cell: ({ row }) => (
-        <span className={classes.monospace} title={stringify(row.original.data)}>
-          {truncate(row.original.data)}
-        </span>
-      ),
-      size: 200,
-      minSize: 150,
-      maxSize: 400,
-    },
-    {
-      accessorKey: 'size',
-      header: 'Size',
-      cell: ({ row }) => (
-        <span className={classes.monospace}>
-          {row.original.size} B
-        </span>
-      ),
-      size: 40,
-      minSize: 40,
-      maxSize: 70,
-    },
-  ], []);
+      {
+        accessorKey: 'data',
+        header: 'Message',
+        cell: ({ row }) => (
+          <span className={classes.monospace} title={stringify(row.original.data)}>
+            {truncate(row.original.data)}
+          </span>
+        ),
+        size: 200,
+        minSize: 150,
+        maxSize: 400,
+      },
+      {
+        accessorKey: 'size',
+        header: 'Size',
+        cell: ({ row }) => <span className={classes.monospace}>{row.original.size} B</span>,
+        size: 40,
+        minSize: 40,
+        maxSize: 70,
+      },
+    ],
+    [],
+  );
 
   const table = useReactTable({
     data: filteredMessages,
@@ -146,7 +150,7 @@ export function MessagesTable({ messages, filterText = '', onMessageSelect, onMe
   useEffect(() => {
     if (selectedRow !== null) {
       const rows = table.getRowModel().rows;
-      const index = rows.findIndex(row => row.id === selectedRow);
+      const index = rows.findIndex((row) => row.id === selectedRow);
       selectedRowIndexRef.current = index;
     } else {
       selectedRowIndexRef.current = -1;
@@ -194,7 +198,7 @@ export function MessagesTable({ messages, filterText = '', onMessageSelect, onMe
   }, [onMessageSelect, onMessageOpen, table]);
 
   return (
-    <div className={classes.tableContainer} tabIndex={0}>
+    <div className={classes.tableContainer}>
       <div className={classes.scrollContainer}>
         <table className={classes.table}>
           <thead>
@@ -202,7 +206,9 @@ export function MessagesTable({ messages, filterText = '', onMessageSelect, onMe
               {table.getHeaderGroups()[0]?.headers.map((header) => {
                 const sortState = header.column.getIsSorted();
                 const sortClass = sortState
-                  ? sortState === 'asc' ? classes.sortAscending : classes.sortDescending
+                  ? sortState === 'asc'
+                    ? classes.sortAscending
+                    : classes.sortDescending
                   : '';
                 const canSort = header.column.getCanSort();
 
@@ -214,14 +220,17 @@ export function MessagesTable({ messages, filterText = '', onMessageSelect, onMe
                     style={{ width: header.getSize() }}
                     tabIndex={canSort ? 0 : undefined}
                     role="columnheader"
-                    aria-label={canSort ? 'Sortable column. Press enter to apply sorting filter' : undefined}
-                    aria-sort={sortState ? (sortState === 'asc' ? 'ascending' : 'descending') : undefined}
+                    aria-label={
+                      canSort ? 'Sortable column. Press enter to apply sorting filter' : undefined
+                    }
+                    aria-sort={
+                      sortState ? (sortState === 'asc' ? 'ascending' : 'descending') : undefined
+                    }
                   >
                     <div>
-                      {header.isPlaceholder ? null : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(header.column.columnDef.header, header.getContext())}
                     </div>
                     {canSort && (
                       <div className={classes.sortIconContainer}>
@@ -235,7 +244,7 @@ export function MessagesTable({ messages, filterText = '', onMessageSelect, onMe
           </thead>
           <tbody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row, index) => {
+              table.getRowModel().rows.map((row) => {
                 const isSelected = row.id === selectedRow;
                 return (
                   <tr
@@ -251,12 +260,7 @@ export function MessagesTable({ messages, filterText = '', onMessageSelect, onMe
                   >
                     {row.getVisibleCells().map((cell) => (
                       <td key={cell.id}>
-                        <div>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </div>
+                        <div>{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
                       </td>
                     ))}
                   </tr>
@@ -265,9 +269,7 @@ export function MessagesTable({ messages, filterText = '', onMessageSelect, onMe
             ) : (
               <tr>
                 <td colSpan={columns.length}>
-                  <div className={classes.emptyState}>
-                    No messages captured yet
-                  </div>
+                  <div className={classes.emptyState}>No messages captured yet</div>
                 </td>
               </tr>
             )}

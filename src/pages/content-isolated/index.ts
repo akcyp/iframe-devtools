@@ -2,7 +2,8 @@ import Browser from 'webextension-polyfill';
 import { IframeMessage } from '@src/types/message';
 
 const setupMessageListener = () => {
-  window.addEventListener('__IFRAME_INSPECTOR_MESSAGE__', ((event: CustomEvent) => {
+  window.addEventListener('__IFRAME_INSPECTOR_MESSAGE__', (e) => {
+    const event = e as CustomEvent;
     const messageData = event.detail;
 
     const message: IframeMessage = {
@@ -20,14 +21,16 @@ const setupMessageListener = () => {
       targetOrigin: messageData.targetOrigin,
     };
 
-    Browser.runtime.sendMessage({
-      type: 'IFRAME_MESSAGE_INTERCEPTED',
-      message,
-      tabId: Browser.devtools?.inspectedWindow?.tabId,
-    }).catch(err => {
-      // If devtools isn't open, this might fail - that's ok
-    });
-  }) as EventListener);
+    Browser.runtime
+      .sendMessage({
+        type: 'IFRAME_MESSAGE_INTERCEPTED',
+        message,
+        tabId: Browser.devtools?.inspectedWindow?.tabId,
+      })
+      .catch((_) => {
+        // If devtools isn't open, this might fail - that's ok
+      });
+  });
 };
 
 try {

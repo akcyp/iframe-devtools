@@ -1,7 +1,7 @@
-import { TreeNode } from "./TreeNode";
-import { Node } from "./shared";
+import { TreeNode } from './TreeNode';
+import { Node } from './shared';
 
-import classes from "./Tree.module.css";
+import classes from './Tree.module.css';
 
 interface TreeProps {
   iframes: Node[];

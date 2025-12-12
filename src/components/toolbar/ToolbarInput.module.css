@@ -16,7 +16,7 @@
 }
 
 .icon-filter {
-  --icon-url: url("../../assets/icons/filter.svg");
+  --icon-url: url('../../assets/icons/filter.svg');
   --icon-size: 16px;
   color: var(--text-secondary);
   width: var(--spacing-8);

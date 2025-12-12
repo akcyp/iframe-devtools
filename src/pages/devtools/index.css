@@ -3,13 +3,13 @@
 * {
   box-sizing: border-box;
   min-width: 0;
-  min-height: 0
+  min-height: 0;
 }
 
 :root {
   height: 100%;
   overflow: hidden;
-  interpolate-size: allow-keywords
+  interpolate-size: allow-keywords;
 }
 
 body {
@@ -24,7 +24,7 @@ body {
   tab-size: 4;
   user-select: none;
   color: var(--text-primary);
-  background: var(--surface-base)
+  background: var(--surface-base);
 }
 
 #__root {

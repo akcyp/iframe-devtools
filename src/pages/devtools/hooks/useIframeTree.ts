@@ -1,11 +1,13 @@
-import Browser from "webextension-polyfill";
-import { useCallback, useEffect, useState } from "react";
-import { Node } from "@src/components/iframe-tree/shared";
+import Browser from 'webextension-polyfill';
+import { useCallback, useEffect, useState } from 'react';
+import { Node } from '@src/components/iframe-tree/shared';
 
-const convertFramesToTree = (frames: Browser.WebNavigation.GetAllFramesCallbackDetailsItemType[]): Node[] => {
+const convertFramesToTree = (
+  frames: Browser.WebNavigation.GetAllFramesCallbackDetailsItemType[],
+): Node[] => {
   const frameMap: Record<number, Node & { parentFrameId: number | null }> = {};
 
-  frames.forEach(frame => {
+  frames.forEach((frame) => {
     frameMap[frame.frameId] = {
       id: frame.frameId.toString(),
       url: frame.url,
@@ -17,7 +19,7 @@ const convertFramesToTree = (frames: Browser.WebNavigation.GetAllFramesCallbackD
 
   const rootFrames: Node[] = [];
 
-  Object.values(frameMap).forEach(frame => {
+  Object.values(frameMap).forEach((frame) => {
     if (frame.parentFrameId !== null && frameMap[frame.parentFrameId]) {
       frameMap[frame.parentFrameId].children!.push(frame);
     } else {
@@ -31,9 +33,10 @@ const convertFramesToTree = (frames: Browser.WebNavigation.GetAllFramesCallbackD
 export const useIframeTree = (port: Browser.Runtime.Port) => {
   const [iframes, setIframes] = useState<Node[]>([]);
 
+  const tabId = Browser.devtools.inspectedWindow.tabId;
+
   const fetchIframeTree = useCallback(async () => {
     try {
-      const tabId = Browser.devtools.inspectedWindow.tabId;
       const frames = await Browser.webNavigation.getAllFrames({ tabId });
       if (frames) {
         setIframes(convertFramesToTree(frames));
@@ -41,12 +44,13 @@ export const useIframeTree = (port: Browser.Runtime.Port) => {
     } catch (error) {
       console.error('[Iframe Inspector] Failed to fetch iframe tree:', error);
     }
-  }, [port]);
+  }, [tabId]);
 
   useEffect(() => {
     // Listen for frame tree from background
-    const handleMessage = (msg: any) => {
-      if (msg.type === 'FRAME_TREE_RESPONSE') {
+    const handleMessage = (message: unknown) => {
+      const msg = message as { type: string; data: Node[] };
+      if (typeof msg === 'object' && msg.type === 'FRAME_TREE_RESPONSE') {
         setIframes(msg.data);
       }
     };

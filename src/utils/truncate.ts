@@ -1,4 +1,4 @@
-import { stringify } from "./stringify";
+import { stringify } from './stringify';
 
 export const truncate = (data: unknown, maxLength = 80): string => {
   const formatted = stringify(data);

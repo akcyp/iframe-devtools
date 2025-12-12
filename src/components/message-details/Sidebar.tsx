@@ -21,11 +21,7 @@ export const MessageDetailsSidebar = ({ message, onClose }: MessageDetailsProps)
             <CloseButton onClick={onClose} />
           </div>
 
-          <DetailsRow
-            label="Time"
-            value={formatTime(message.timestamp)}
-            monospace
-          />
+          <DetailsRow label="Time" value={formatTime(message.timestamp)} monospace />
 
           <DetailsRow
             label="Direction"

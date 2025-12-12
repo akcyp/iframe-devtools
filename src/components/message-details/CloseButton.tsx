@@ -6,11 +6,9 @@ export interface CloseButtonProps {
 
 export const CloseButton = ({ onClick }: CloseButtonProps) => {
   return (
-    <button
-      className={classes.btn}
-      onClick={onClick}
-      title="Close details"
-    > ✕
+    <button className={classes.btn} onClick={onClick} title="Close details">
+      {' '}
+      ✕
     </button>
   );
-}
+};

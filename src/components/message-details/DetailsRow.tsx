@@ -1,5 +1,5 @@
-import cs from "classnames";
-import classes from "./DetailsRow.module.css";
+import cs from 'classnames';
+import classes from './DetailsRow.module.css';
 
 export interface DetailsRowProps {
   label: string;
@@ -11,7 +11,7 @@ export const DetailsRow = ({ label, value, monospace }: DetailsRowProps) => {
   return (
     <div className={classes.row}>
       <div className={classes.label}>{label}</div>
-      <div className={cs(classes.value, { [classes.monospace]: monospace })}>{ value }</div>
+      <div className={cs(classes.value, { [classes.monospace]: monospace })}>{value}</div>
     </div>
   );
 };

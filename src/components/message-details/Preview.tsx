@@ -19,14 +19,14 @@ const lightTheme = {
 export function Preview({ data }: { data: unknown }) {
   const isDark = useDarkMode();
   const parsedData = useMemo(() => parseData(data), [data]);
-  const isJsonData = useMemo(() => typeof parsedData === 'object' && parsedData !== null, [parsedData]);
+  const isJsonData = useMemo(
+    () => typeof parsedData === 'object' && parsedData !== null,
+    [parsedData],
+  );
 
   return isJsonData ? (
     <div className={classes.json}>
-      <JsonView
-        data={parsedData}
-        style={isDark ? darkTheme : lightTheme}
-      />
+      <JsonView data={parsedData} style={isDark ? darkTheme : lightTheme} />
     </div>
   ) : (
     <pre className={classes.other}>{String(parsedData)}</pre>

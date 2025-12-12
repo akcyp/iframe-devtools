@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 import { useCallback, useState } from 'react';
 import { Node } from './shared';
 import cs from 'classnames';
@@ -25,10 +28,13 @@ export const TreeNode = ({ node, level, selectedId, onSelect, onDblClick }: Tree
     onDblClick?.(node);
   }, [onDblClick, node]);
 
-  const handleToggle = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsExpanded(!isExpanded);
-  }, [isExpanded]);
+  const handleToggle = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setIsExpanded(!isExpanded);
+    },
+    [isExpanded],
+  );
 
   return (
     <>
@@ -42,8 +48,9 @@ export const TreeNode = ({ node, level, selectedId, onSelect, onDblClick }: Tree
           <span
             className={cs(classes.disclosure, { [classes.expanded]: isExpanded })}
             onClick={handleToggle}
-            children={"▸"}
-          />
+          >
+            ▸
+          </span>
         )}
         {!hasChildren && <span className={classes.disclosurePlaceholder} />}
         <div className={cs(classes.icon, { [classes.top]: level === 0 })} />

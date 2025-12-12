@@ -78,4 +78,4 @@ export const Main = ({ port }: MainProps) => {
       </div>
     </div>
   );
-}
+};

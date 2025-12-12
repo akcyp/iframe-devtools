@@ -5,7 +5,12 @@ export const formatUrl = (url: string): string => {
     if (urlObj.origin === window.location.origin) {
       return urlObj.pathname + urlObj.search + urlObj.hash;
     }
-    return urlObj.hostname + (urlObj.pathname !== '/' ? urlObj.pathname : '') + urlObj.search + urlObj.hash;
+    return (
+      urlObj.hostname +
+      (urlObj.pathname !== '/' ? urlObj.pathname : '') +
+      urlObj.search +
+      urlObj.hash
+    );
   } catch {
     return url;
   }
