@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 4px;
-  mask-image: url("../../assets/icons/iframe.svg");
+  mask-image: url('../../assets/icons/iframe.svg');
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -52,7 +52,7 @@
 }
 
 .icon.top {
-  mask-image: url("../../assets/icons/frame.svg");
+  mask-image: url('../../assets/icons/frame.svg');
 }
 
 .title {

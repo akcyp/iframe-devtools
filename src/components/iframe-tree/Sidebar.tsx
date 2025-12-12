@@ -10,15 +10,15 @@ interface IframeSidebarProps {
   onDblClick?: (node: Node) => void;
 }
 
-export const IframeSidebar = ({ iframes, selectedId, onSelect, onDblClick }: IframeSidebarProps) => {
+export const IframeSidebar = ({
+  iframes,
+  selectedId,
+  onSelect,
+  onDblClick,
+}: IframeSidebarProps) => {
   return (
     <div className={classses.sidebar}>
-      <Tree
-        iframes={iframes}
-        selectedId={selectedId}
-        onSelect={onSelect}
-        onDblClick={onDblClick}
-      />
+      <Tree iframes={iframes} selectedId={selectedId} onSelect={onSelect} onDblClick={onDblClick} />
     </div>
   );
 };

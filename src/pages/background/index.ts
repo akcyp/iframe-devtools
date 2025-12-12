@@ -1,16 +1,19 @@
 import Browser from 'webextension-polyfill';
 
 const devtoolsConnections = new Map<number, Browser.Runtime.Port>();
-const messagesPerTab = new Map<number, any[]>();
+const messagesPerTab = new Map<number, unknown[]>();
 
 Browser.runtime.onConnect.addListener((port) => {
   console.log('[Iframe Inspector] Connection attempt:', port.name);
-  
+
   if (port.name.startsWith('devtools-')) {
     const tabId = parseInt(port.name.split('-')[1]);
     devtoolsConnections.set(tabId, port);
 
-    console.log(`[Iframe Inspector] Devtools connected for tab ${tabId}. Active connections:`, Array.from(devtoolsConnections.keys()));
+    console.log(
+      `[Iframe Inspector] Devtools connected for tab ${tabId}. Active connections:`,
+      Array.from(devtoolsConnections.keys()),
+    );
 
     const storedMessages = messagesPerTab.get(tabId) || [];
     if (storedMessages.length > 0) {
@@ -53,8 +56,11 @@ Browser.runtime.onMessage.addListener((message: unknown, sender: Browser.Runtime
     }
 
     const devtoolsPort = devtoolsConnections.get(tabId);
-    console.log(`[Iframe Inspector] Message from tab ${tabId}. Has devtools connection:`, !!devtoolsPort);
-    
+    console.log(
+      `[Iframe Inspector] Message from tab ${tabId}. Has devtools connection:`,
+      !!devtoolsPort,
+    );
+
     if (devtoolsPort) {
       devtoolsPort.postMessage({
         type: 'IFRAME_MESSAGE',

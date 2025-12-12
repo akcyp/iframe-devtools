@@ -16,5 +16,5 @@ export const ToolbarInput = ({ filterText, setFilterText }: ToolbarInputProps) =
         onChange={(e) => setFilterText(e.target.value)}
       />
     </div>
-  )
+  );
 };

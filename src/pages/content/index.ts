@@ -1,4 +1,4 @@
-import { interceptMessages } from "./utils/interceptMessages";
+import { interceptMessages } from './utils/interceptMessages';
 
 try {
   interceptMessages();

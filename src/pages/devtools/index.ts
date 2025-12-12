@@ -5,12 +5,10 @@ import { Main } from './main';
 
 import './index.css';
 
-Browser
-  .devtools
-  .panels
+Browser.devtools.panels
   .create('Iframe inspector', 'icon-48x48.png', 'src/pages/devtools/index.html')
   .catch(console.error)
-  .then((panel => {
+  .then((panel) => {
     if (!panel) throw new Error('Failed to create devtools panel');
     console.log('[Iframe Inspector] Devtools panel created');
 
@@ -19,7 +17,7 @@ Browser
 
     console.log(`[Iframe Inspector] Connected to background for tab ${tabId}`);
 
-    const rootContainer = document.querySelector("#__root");
+    const rootContainer = document.querySelector('#__root');
     if (!rootContainer) throw new Error("Can't find Popup root element");
     const root = createRoot(rootContainer);
     root.render(createElement(Main, { port }));
@@ -27,4 +25,4 @@ Browser
     panel.onHidden.addListener(() => {
       root.unmount();
     });
-  }));
+  });

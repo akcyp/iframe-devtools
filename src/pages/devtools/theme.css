@@ -57,8 +57,8 @@
   --icon-size: 16px;
 
   &.platform-linux {
-    --font-family: "Google Sans Text", "Google Sans", system-ui, sans-serif;
-    --font-mono: "Noto Sans Mono", "DejaVu Sans Mono", monospace;
+    --font-family: 'Google Sans Text', 'Google Sans', system-ui, sans-serif;
+    --font-mono: 'Noto Sans Mono', 'DejaVu Sans Mono', monospace;
     --font-size-mono: 11px;
   }
 

@@ -1,4 +1,4 @@
-export const getObjectSize = (obj: any) => {
+export const getObjectSize = (obj: unknown) => {
   try {
     return new Blob([JSON.stringify(obj)]).size;
   } catch {
