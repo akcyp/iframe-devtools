@@ -44,6 +44,18 @@ export default [
       ...jsxA11yPlugin.configs.recommended.rules,
       ...importPlugin.configs.recommended.rules,
       ...(importPlugin.configs.typescript?.rules ?? {}),
+      // Use the TS-aware unused-vars rule and ignore names starting with _
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
+      // With TypeScript + new JSX transform, React doesn't need to be in scope
+      "no-undef": "off",
       "react/react-in-jsx-scope": "off",
     },
     settings: {
