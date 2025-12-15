@@ -23,7 +23,7 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.560.0",
-    "react": "^19.1.0",
+    "react": "^19.2.3",
     "react-dom": "^19.1.0",
     "react-json-view-lite": "^2.5.0",
     "webextension-polyfill": "^0.12.0"
